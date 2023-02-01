@@ -1,6 +1,7 @@
 plugins {
     `java-gradle-plugin`
     id("org.jetbrains.kotlin.jvm") version "1.7.10"
+    `maven-publish`
 }
 
 repositories {
@@ -14,6 +15,9 @@ dependencies {
     testImplementation(kotlin("test"))
     testImplementation(gradleTestKit())
 }
+
+group = "com.amosolov"
+version = "1.0"
 
 gradlePlugin {
     plugins.create("kmpp-compatibility-check") {
