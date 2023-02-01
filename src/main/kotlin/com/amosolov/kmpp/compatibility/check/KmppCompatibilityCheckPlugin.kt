@@ -11,8 +11,10 @@ open class KmppCompatibilityCheckPlugin: Plugin<Project> {
         }
 
         val extension = project.extensions.create("kmppCompatibilityCheck", KmppCompatibilityCheckExtension::class.java)
+        val filteredInput = extension.inputFiles.asFileTree.matching(extension.filter)
+
         project.tasks.register("kmppCompatibilityCheck", KmppCompatibilityCheckTask::class.java) {
-            it.inputFiles.from(extension.inputFiles)
+            it.inputFiles.from(filteredInput)
         }
 
         println("Success")

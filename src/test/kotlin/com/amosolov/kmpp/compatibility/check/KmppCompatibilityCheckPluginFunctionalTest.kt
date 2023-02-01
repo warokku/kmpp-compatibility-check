@@ -28,12 +28,12 @@ class KmppCompatibilityCheckPluginFunctionalTest {
     }
 
     @Test
-    fun testHelloWorldTask() {
-        val buildFile = testProjectDir
+    fun testTaskOutcome() {
+        testProjectDir
             .resolve("build.gradle.kts")
             .appendText("""
                 kmppCompatibilityCheck {
-                    inputFile.set(File("testSource.kt"))
+                    inputFile.from(File("testSource.kt"))
                 }
             """.trimIndent())
 
