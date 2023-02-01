@@ -1,8 +1,7 @@
 package com.amosolov.kmpp.compatibility.check
 
-import org.gradle.api.provider.Property
-import java.io.File
+import org.gradle.api.file.ConfigurableFileCollection
 
 abstract class KmppCompatibilityCheckExtension {
-    abstract val inputFiles: Property<File>
+    abstract val inputFiles: ConfigurableFileCollection
 }

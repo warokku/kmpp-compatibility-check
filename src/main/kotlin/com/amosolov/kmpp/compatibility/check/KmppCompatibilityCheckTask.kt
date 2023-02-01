@@ -15,6 +15,6 @@ abstract class KmppCompatibilityCheckTask @Inject constructor(
 
     @TaskAction
     fun check() {
-        println("Check task executed")
+        println("Checking files: ${inputFiles.files.map { it.name }}")
     }
 }
