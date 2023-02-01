@@ -1,13 +1,12 @@
 package com.amosolov.kmpp.compatibility.check
 
 import com.android.build.gradle.BaseExtension
-import com.android.builder.model.AndroidLibrary
 import org.gradle.api.internal.project.ProjectInternal
 import org.gradle.testfixtures.ProjectBuilder
 import java.io.File
 import kotlin.test.*
 
-class KmppCompatibilityCheckPluginIntegrationTest {
+class KmppCompatibilityCheckPluginUnitTest {
 
     @Test
     fun `plugin does not register task when dependencies are missing`() {

@@ -12,6 +12,7 @@ dependencies {
     testImplementation("com.android.library:com.android.library.gradle.plugin:7.4.0")
     testImplementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.0")
     testImplementation(kotlin("test"))
+    testImplementation(gradleTestKit())
 }
 
 gradlePlugin {
