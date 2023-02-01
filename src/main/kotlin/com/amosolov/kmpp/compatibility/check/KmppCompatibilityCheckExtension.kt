@@ -1,4 +1,4 @@
 package com.amosolov.kmpp.compatibility.check
 
-class KmppCompatibilityCheckExtension {
+open class KmppCompatibilityCheckExtension {
 }
