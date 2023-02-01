@@ -10,8 +10,10 @@ open class KmppCompatibilityCheckPlugin: Plugin<Project> {
             error("Given Gradle Project is expected to be a Android-only Kotlin project")
         }
 
-        project.extensions.create("kmppCompatibilityCheck", KmppCompatibilityCheckExtension::class.java)
-        project.tasks.create("kmppCompatibilityCheck", KmppCompatibilityCheckTask::class.java)
+        val extension = project.extensions.create("kmppCompatibilityCheck", KmppCompatibilityCheckExtension::class.java)
+        project.tasks.register("kmppCompatibilityCheck", KmppCompatibilityCheckTask::class.java) {
+            it.inputFiles.from(extension.inputFile)
+        }
 
         println("Success")
     }
