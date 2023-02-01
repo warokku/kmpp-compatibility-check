@@ -8,12 +8,14 @@ repositories {
 }
 
 dependencies {
+    testImplementation("com.android.library.gradle.plugin:7.4.0")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+    testImplementation("org.jetbrains.kotlin.android.gradle.plugin:1.7.10")
 }
 
 gradlePlugin {
     val plugin by plugins.creating {
-        id = "com.amosolov.kmpp-compatibility-check.properties"
+        id = "com.amosolov.kmpp-compatibility-check"
         implementationClass = "com.amosolov.kmpp.compatibility.check.KmppCompatibilityCheckPlugin"
     }
 }
