@@ -12,8 +12,3 @@ repositories {
 android {
     compileSdkVersion(33)
 }
-
-kmppCompatibilityCheck {
-    inputFiles.from(kotlin.sourceSets.getByName("main").kotlin.files)
-    filter.exclude("*.java")
-}
