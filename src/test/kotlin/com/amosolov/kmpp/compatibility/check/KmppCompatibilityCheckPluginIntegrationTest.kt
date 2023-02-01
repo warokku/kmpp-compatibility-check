@@ -1,15 +1,9 @@
 package com.amosolov.kmpp.compatibility.check
 
-import java.io.File
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Assertions.assertNull
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.io.TempDir
-import java.io.BufferedWriter
-import java.io.FileWriter
-import java.io.IOException
 
 class KmppCompatibilityCheckPluginIntegrationTest {
 
