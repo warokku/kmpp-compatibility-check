@@ -12,7 +12,7 @@ open class KmppCompatibilityCheckPlugin: Plugin<Project> {
 
         val extension = project.extensions.create("kmppCompatibilityCheck", KmppCompatibilityCheckExtension::class.java)
         project.tasks.register("kmppCompatibilityCheck", KmppCompatibilityCheckTask::class.java) {
-            it.inputFiles.from(extension.inputFile)
+            it.inputFiles.from(extension.inputFiles)
         }
 
         println("Success")

@@ -38,7 +38,7 @@ class KmppCompatibilityCheckPluginUnitTest {
 
         val extension = project.extensions.getByType(KmppCompatibilityCheckExtension::class.java)
         val file = File("testSource.kts")
-        extension.inputFile.set(file)
+        extension.inputFiles.set(file)
 
         val task = project.tasks.getByName("kmppCompatibilityCheck") as KmppCompatibilityCheckTask
         assertEquals(listOf(file.name), task.inputFiles.files.map { it.name })
@@ -55,7 +55,7 @@ class KmppCompatibilityCheckPluginUnitTest {
 
         val extension = project.extensions.getByType(KmppCompatibilityCheckExtension::class.java)
         val file = File("testSource.kts")
-        extension.inputFile.set(file)
+        extension.inputFiles.set(file)
 
         project.tasks.named("kmppCompatibilityCheck") {
             fail("Task ${it.name} was configured")
