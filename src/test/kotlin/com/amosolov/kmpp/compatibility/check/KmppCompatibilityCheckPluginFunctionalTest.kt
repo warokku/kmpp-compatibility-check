@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.io.TempDir
 import java.io.File
-import kotlin.test.assertEquals
+import kotlin.test.*
 
 
 class KmppCompatibilityCheckPluginFunctionalTest {
@@ -32,8 +32,9 @@ class KmppCompatibilityCheckPluginFunctionalTest {
         testProjectDir
             .resolve("build.gradle.kts")
             .appendText("""
+                
                 kmppCompatibilityCheck {
-                    inputFile.from(File("testSource.kt"))
+                    inputFiles.from(File("testSource.kt"))
                 }
             """.trimIndent())
 
