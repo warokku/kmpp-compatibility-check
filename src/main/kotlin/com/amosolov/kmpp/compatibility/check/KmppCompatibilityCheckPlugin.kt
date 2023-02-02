@@ -18,6 +18,7 @@ open class KmppCompatibilityCheckPlugin: Plugin<Project> {
 
         project.tasks.register("kmppCompatibilityCheck", KmppCompatibilityCheckTask::class.java) {
             it.inputFiles.from(filteredInput)
+            it.rules.addAll(extension.rules)
         }
 
         println("Success")

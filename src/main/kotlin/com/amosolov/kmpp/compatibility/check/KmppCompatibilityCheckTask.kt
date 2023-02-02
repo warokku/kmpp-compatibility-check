@@ -1,20 +1,63 @@
 package com.amosolov.kmpp.compatibility.check
 
+import com.amosolov.kmpp.compatibility.checker.KmppCompatibilityChecker
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.ConfigurableFileCollection
 import org.gradle.api.model.ObjectFactory
-import org.gradle.api.tasks.InputFiles
-import org.gradle.api.tasks.TaskAction
+import org.gradle.api.tasks.*
+import org.gradle.work.ChangeType
+import org.gradle.work.InputChanges
 import javax.inject.Inject
+import com.amosolov.kmpp.compatibility.checker.Rule
+import org.gradle.api.GradleException
+import org.gradle.api.file.RegularFileProperty
+import org.gradle.work.Incremental
 
 abstract class KmppCompatibilityCheckTask @Inject constructor(
     objectFactory: ObjectFactory
 ): DefaultTask() {
     @get:InputFiles
+    @get:SkipWhenEmpty
+    @get:IgnoreEmptyDirectories
     abstract val inputFiles: ConfigurableFileCollection
 
+    @get:Input
+    val rules = mutableSetOf<Rule>()
+
+    init {
+        // Task
+        // Required for @Incremental to work
+        outputs.upToDateWhen { true }
+    }
+
     @TaskAction
-    fun check() {
-        println("Checking files: ${inputFiles.files.map { it.name }}")
+    fun check(inputChanges: InputChanges) {
+        val changedFiles = inputChanges.getFileChanges(inputFiles)
+            .filter { it.changeType in setOf(ChangeType.MODIFIED, ChangeType.ADDED) }
+            .map { it.file }
+
+        if (changedFiles.isEmpty()) {
+            logger.info("Received empty input")
+            return
+        }
+
+        logger.info("Input:\n")
+        logger.info(changedFiles.joinToString(separator = "\n") { it.absolutePath })
+
+        logger.info("Enabled rules:\n")
+        logger.info(rules.joinToString(separator = ", ") { it.name })
+
+        val checker = KmppCompatibilityChecker(rules)
+        val errorReports = checker.checkSources(changedFiles)
+
+        if (errorReports.isEmpty()) {
+            return
+        }
+
+        errorReports.forEach {
+            logger.warn("${it.file.absolutePath}: line ${it.lineNumber} - ${it.message}")
+        }
+
+        logger.warn("Got ${errorReports.size} KMPP compatibility error(s)")
     }
 }
