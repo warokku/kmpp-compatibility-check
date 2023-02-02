@@ -11,6 +11,7 @@ import javax.inject.Inject
 import com.amosolov.kmpp.compatibility.checker.Rule
 import org.gradle.api.GradleException
 import org.gradle.api.file.RegularFileProperty
+import org.gradle.api.provider.Property
 import org.gradle.work.Incremental
 
 abstract class KmppCompatibilityCheckTask @Inject constructor(
@@ -23,6 +24,9 @@ abstract class KmppCompatibilityCheckTask @Inject constructor(
 
     @get:Input
     val rules = mutableSetOf<Rule>()
+
+    @get:Input
+    abstract val strict: Property<Boolean>
 
     init {
         // Task
@@ -58,6 +62,12 @@ abstract class KmppCompatibilityCheckTask @Inject constructor(
             logger.warn("${it.file.absolutePath}: line ${it.lineNumber} - ${it.message}")
         }
 
-        logger.warn("Got ${errorReports.size} KMPP compatibility error(s)")
+        val finalMessage = "Got ${errorReports.size} KMPP compatibility error(s)"
+
+        if (strict.get()) {
+            throw GradleException(finalMessage)
+        }
+
+        logger.warn(finalMessage)
     }
 }

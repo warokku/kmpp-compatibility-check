@@ -1,5 +1,6 @@
 package com.amosolov.kmpp.compatibility.check
 
+import com.amosolov.kmpp.compatibility.checker.Rule
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -15,10 +16,14 @@ open class KmppCompatibilityCheckPlugin: Plugin<Project> {
 
         project.tasks.register("kmppCompatibilityCheck", KmppCompatibilityCheckTask::class.java) {
             it.inputFiles.from(filteredInput)
-            it.rules.addAll(extension.rules)
-        }
+            it.strict.set(extension.strict)
 
-        println("Success")
+            if (extension.allRulesEnabled) {
+                it.rules.addAll(Rule.values())
+            } else {
+                it.rules.addAll(extension.rules)
+            }
+        }
     }
 
     private fun isAndroidProject(project: Project): Boolean {
