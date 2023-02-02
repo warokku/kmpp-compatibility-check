@@ -44,7 +44,7 @@ class KmppCompatibilityCheckPluginFunctionalTest {
     }
 
     @Test
-    fun `task outcome is NO_SOURCE if provided with inputs that match filters`() {
+    fun `task outcome is NO_SOURCE if provided with inputs that matches filters`() {
         buildFile().appendJavaImportSourceToInputs()
         buildFile().appendJavaExtensionToFilters()
 
