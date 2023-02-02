@@ -59,7 +59,7 @@ abstract class KmppCompatibilityCheckTask @Inject constructor(
         }
 
         errorReports.forEach {
-            logger.warn("${it.file.absolutePath}: line ${it.lineNumber} - ${it.message}")
+            log("${it.file.absolutePath}: line ${it.lineNumber} - ${it.message}")
         }
 
         val finalMessage = "Got ${errorReports.size} KMPP compatibility error(s)"
@@ -69,5 +69,13 @@ abstract class KmppCompatibilityCheckTask @Inject constructor(
         }
 
         logger.warn(finalMessage)
+    }
+
+    private fun log(message: String) {
+        if (strict.get()) {
+            logger.error(message)
+        } else {
+            logger.warn(message)
+        }
     }
 }
