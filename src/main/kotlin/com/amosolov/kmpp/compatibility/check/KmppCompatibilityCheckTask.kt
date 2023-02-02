@@ -1,22 +1,16 @@
 package com.amosolov.kmpp.compatibility.check
 
 import com.amosolov.kmpp.compatibility.checker.KmppCompatibilityChecker
+import com.amosolov.kmpp.compatibility.checker.Rule
 import org.gradle.api.DefaultTask
+import org.gradle.api.GradleException
 import org.gradle.api.file.ConfigurableFileCollection
-import org.gradle.api.model.ObjectFactory
+import org.gradle.api.provider.Property
 import org.gradle.api.tasks.*
 import org.gradle.work.ChangeType
 import org.gradle.work.InputChanges
-import javax.inject.Inject
-import com.amosolov.kmpp.compatibility.checker.Rule
-import org.gradle.api.GradleException
-import org.gradle.api.file.RegularFileProperty
-import org.gradle.api.provider.Property
-import org.gradle.work.Incremental
 
-abstract class KmppCompatibilityCheckTask @Inject constructor(
-    objectFactory: ObjectFactory
-): DefaultTask() {
+abstract class KmppCompatibilityCheckTask: DefaultTask() {
     @get:InputFiles
     @get:SkipWhenEmpty
     @get:IgnoreEmptyDirectories

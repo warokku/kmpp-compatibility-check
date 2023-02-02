@@ -8,6 +8,6 @@ abstract class KmppCompatibilityCheckExtension {
     abstract val inputFiles: ConfigurableFileCollection
     val filter = PatternSet()
     val rules = mutableSetOf<Rule>()
-    var strict = false
+    var errorInsteadOfWarnings = false
     var allRulesEnabled = true
 }
