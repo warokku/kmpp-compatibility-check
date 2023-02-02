@@ -2,8 +2,6 @@ package com.amosolov.kmpp.compatibility.check
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-//import org.jetbrains.kotlin.gradle.dsl.KotlinProjectExtension
-//import java.io.File
 
 open class KmppCompatibilityCheckPlugin: Plugin<Project> {
 
@@ -13,7 +11,6 @@ open class KmppCompatibilityCheckPlugin: Plugin<Project> {
         }
 
         val extension = project.extensions.create("kmppCompatibilityCheck", KmppCompatibilityCheckExtension::class.java)
-//        extension.inputFiles.from(project.getDefaultInputFiles())
         val filteredInput = extension.inputFiles.asFileTree.matching(extension.filter)
 
         project.tasks.register("kmppCompatibilityCheck", KmppCompatibilityCheckTask::class.java) {
@@ -31,10 +28,4 @@ open class KmppCompatibilityCheckPlugin: Plugin<Project> {
 
         return project.plugins.hasPlugin("com.android.application") ||  project.plugins.hasPlugin("com.android.library")
     }
-//
-//    private fun Project.getDefaultInputFiles(): Iterable<File> {
-//        return extensions.getByType(KotlinProjectExtension::class.java)
-//            .sourceSets.getByName("main")
-//            .kotlin
-//    }
 }
